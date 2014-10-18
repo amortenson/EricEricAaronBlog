@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block title %}
+<h1>Forums<h1>
+{% endblock title %}
+
+{% block bodycontent %}
+<!-- center just the form perhaps-->
+<center>
+<div class="pure-u-2-3">
+  <form method="POST" class="pure-form pure-form-stacked" action="post">
+    <fieldset>
+      <legend>Create New Post</legend>
+      <input type="text" name="blog" placeholder="Username">
+      <input id="title" type="text" name="title" placeholder="Title">
+      
+      <textarea  class="pure-u-3-4"  name="body"></textarea>
+      
+      <button type="submit" class="pure-button" name="b">Submit</button>
+    </fieldset>
+  </form>
+</div>
+</center>
+<br><hr><br>
+<table class="pure-table pure-table-horizontal">
+  <thead>
+    <th>{{ topic }}</th>
+    <th></th>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+	A link to a post goes here.
+      </td>
+      <td>
+	Idk what goes here.
+      </td>
+    </tr>
+  </tbody>
+</table>
+<!-- use python to get all POSTS and put it into a {string} in a table-->
+{% endblock bodycontent %}
+
