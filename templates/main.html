@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block title %}
+<h1>Blog Thingy<h1>
+{% endblock title %}
+
+{% block bodycontent %}
+<p> Well hello, there.</p>
+<div class="pure-u-2-3">
+<form method="POST" class="pure-form pure-form-stacked">
+    <fieldset>
+        <legend>      
+	  <input type="text" name="blog" placeholder="Blog Name">
+	</legend>
+     
+        <label for="title">Post</label>  
+	<input id="title" type="text" name="title" placeholder="Title">
+
+	<textarea  class="pure-u-3-4"  name="body"></textarea>
+
+	<button type="submit" class="pure-button" name="b">Submit</button>
+    </fieldset>
+</form>
+</div>
+{% endblock bodycontent %}

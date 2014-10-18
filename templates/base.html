@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Blog Thingy</title>
+  <link rel="shortcut icon" href="http://bart.stuy.edu/~aaron.mortenson/muffins/moop.ico">
+  <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.5.0/pure-min.css">
+  <style>
+#main {
+  background-color:#ffffff;
+}
+    </style>
+</head>
+
+<body Bgcolor="E0D8E0">
+  <center>
+    <div class="pure-u-11-12">
+	  {% block title %}
+	  placeholder title
+	  {% endblock title %}
+    </div>
+    </br>
+    <div class="pure-u-11-12" id = "main">
+	  {% block bodycontent %}
+	  placeholder body
+	  {% endblock bodycontent %}
+    </div>
+  </center></br>
+</body>
+<html>
