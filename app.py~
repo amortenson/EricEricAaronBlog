@@ -1,15 +1,8 @@
 from flask import Flask,request,redirect,render_template,session
 from postmarkup import render_bbcode
 import sqlite3
-app=Flask(__name__)
-conn = sqlite3.connect("forum.db")
-c = conn.cursor()
-##q = "CREATE TABLE forumstuff(forumid integer, forumname text, author text)"
-##result = c.execute(q)
-##q = "CREATE TABLE poststuff(postid integer, post text)"
-##result = c.execute(q)
-##conn.commit();
 
+app=Flask(__name__)
 
 @app.route("/", methods=["GET","POST"])
 @app.route("/home", methods=["GET","POST"])
