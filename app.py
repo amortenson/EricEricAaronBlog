@@ -24,9 +24,7 @@ def forum():
 def post():
     forumTopic = request.args["topic"]
     return render_template("post.html",topic=forumTopic)
-
-
-
+    
 if __name__=="__main__":
     app.debug=True
     app.run();
