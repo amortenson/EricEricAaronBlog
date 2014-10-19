@@ -1,15 +1,28 @@
 {% extends "base.html" %}
 
 {% block title %}
-<h1>Forums<h1>
+<h1>Forums: <h1>
 {% endblock title %}
 
 {% block bodycontent %}
+<form class="pure-form pure-form-stacked" method="GET" action="forum">
+  <button type="submit" name="topic" value="{{ topic }}" class="pure-button">
+    <i class="fa fa-caret-left">  Back</i>
+  </button>
+</form>
 <p>This is one of the posts in a table? Or just html</p>
 
-<!-- original poster here-->
-
-<!-- and then go through all the comments lol-->
-
+<table class="pure-table pure-table-bordered">
+  <!-- grab the theads and td's from python's db powers
+       and enter it in a {string}-->
+  <thead>
+    <th>Poster</th>
+    <th>Hi pls call me senpai desu</th>
+  </thead>
+  <tr>
+    <td>Commenter#1</td>
+    <td>Ayyyy senpai daisuki desu</td>
+  </tr>
+</table>
 <!-- oops haven't started working here yet -eric liao-->
 {% endblock bodycontent %}

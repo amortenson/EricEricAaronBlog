@@ -1,5 +1,6 @@
 from flask import Flask,request,redirect,render_template,session
 from postmarkup import render_bbcode
+import sqlite3
 
 app=Flask(__name__)
 
@@ -21,7 +22,8 @@ def forum():
     return render_template("forum.html",topic=forumTopic)
 @app.route("/post", methods=["GET","POST"])
 def post():
-    return render+template("post.html")
+    forumTopic = request.args["topic"]
+    return render_template("post.html",topic=forumTopic)
 
 
 
