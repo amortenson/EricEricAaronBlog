@@ -38,12 +38,20 @@ def forum():
             print "success"
         else:
             print "fail"
-    
-        
     forumTopic = request.args["topic"]
     return render_template("forum.html",topic=forumTopic)
 @app.route("/post", methods=["GET","POST"])
 def post():
+    ##get the current postid using sqlite
+    ##get the post id of 
+    postID = 1
+    commentID = 1
+    if "comment" in request.args:
+        if (request.args["username"]!="" and
+            request.args["body"]!=""):
+            print "success"
+        else:
+            print "fail"
     
     forumTopic = request.args["topic"]
     return render_template("post.html",topic=forumTopic)
