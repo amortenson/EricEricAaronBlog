@@ -4,11 +4,12 @@ import sqlite3
 app=Flask(__name__)
 conn = sqlite3.connect("forum.db")
 c = conn.cursor()
-##q = "CREATE TABLE forumstuff(forumid integer, forumname text, author text)"
-##result = c.execute(q)
-##q = "CREATE TABLE poststuff(postid integer, post text)"
-##result = c.execute(q)
-##conn.commit();
+q = "CREATE TABLE IF NOT EXISTS forumstuff(forumid integer, forumname text, author text)"
+result = c.execute(q)
+##qc -> q for the comments .db file
+qc = "CREATE TABLE IF NOT EXISTS poststuff(postid integer, post text)"
+result = c.execute(qc)
+conn.commit();
 
 
 @app.route("/", methods=["GET","POST"])
@@ -26,17 +27,25 @@ def index():
 @app.route("/forum", methods=["GET","POST"])
 def forum():
     ##list all of the posts using the db
+    ##request.args = get
+    ##request.form = POST
+    if "b" in request.args:
+        if (request.args["username"]!="" and
+            request.args["title"]!="" and
+            request.args["body"]!=""):
+            print "success"
+        else:
+            print "fail"
+    
+        
     forumTopic = request.args["topic"]
     return render_template("forum.html",topic=forumTopic)
 @app.route("/post", methods=["GET","POST"])
 def post():
-    ##get strings from the database, read.
-    ##parse it?
-    ##return in string format and place into the comments
-    ##be sure to include all <th>, <br> <tr>, etc.
+    
     forumTopic = request.args["topic"]
     return render_template("post.html",topic=forumTopic)
-    
+     
 if __name__=="__main__":
     app.debug=True
     app.run();

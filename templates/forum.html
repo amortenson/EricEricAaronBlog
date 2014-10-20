@@ -15,10 +15,11 @@
 <div class="pure-u-2-3">
   <!-- the form to create a new post will redirect them to the new post they made?
        under post() in app.py, take the new post and add it to the db file. -senpai -->
-  <form method="POST" class="pure-form pure-form-stacked" action="post">
+  <form method="GET" class="pure-form pure-form-stacked" action="forum">
     <fieldset>
       <legend>Create New Post</legend>
-      <input type="text" name="blog" placeholder="Username">
+      <input type="hidden" name="topic" value="{{ topic }}">
+      <input type="text" name="username" placeholder="Username">
       <input id="title" type="text" name="title" placeholder="Title">
       <textarea  class="pure-u-3-4"  name="body"></textarea>
       
