@@ -2,13 +2,15 @@ from flask import Flask,request,redirect,render_template,session
 from postmarkup import render_bbcode
 import sqlite3
 app=Flask(__name__)
-conn = sqlite3.connect("forum.db")
+conn = sqlite3.connect("post.db")
+conn2 = sqlite3.connect("comment.db")
 c = conn.cursor()
+c2= conn.cursor()
 q = "CREATE TABLE IF NOT EXISTS forumstuff(forumid integer, forumname text, author text)"
 result = c.execute(q)
 ##qc -> q for the comments .db file
 qc = "CREATE TABLE IF NOT EXISTS poststuff(postid integer, post text)"
-result = c.execute(qc)
+result = c2.execute(qc)
 conn.commit();
 
 
