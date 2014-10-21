@@ -38,19 +38,37 @@ def index():
         return render_template("main.html")
 @app.route("/forum", methods=["GET","POST"])
 def forum():
+    if request.method=="GET":
+        forumTopic = request.args["topic"]
+        return render_template("forum.html",topic=forumTopic)
     ##list all of the posts using the db
     ##request.args = get
     ##request.form = POST
-    if "b" in request.args:
-        if (request.args["username"]!="" and
-            request.args["title"]!="" and
-            request.args["body"]!=""):
+    else:
+        body = request.form["body"]
+        title = request.form["title"]
+        author = request.form["username"]
+        blog = request.form["topic"]
+        if (author!="" and
+            title!="" and
+            body!=""):
             print "success"
+            conn = sqlite3.connect("posts.db")
+            c = conn.cursor()
+            q = '''insert into posts values(NULL,"'''+body+'''","'''+title+'''","'''+author+'''","'''+blog+'''")'''
+            c.execute(q)
+            q = "select * from posts"
+            result = c.execute(q)
+            conn.commit()
+            for r in result:
+                print r
+            forumTopic = request.form["topic"]
             
         else:
             print "fail"
-    forumTopic = request.args["topic"]
-    return render_template("forum.html",topic=forumTopic)
+            forumTopic = request.args["topic"]
+        return render_template("forum.html",topic=forumTopic)
+
 @app.route("/post", methods=["GET","POST"])
 def post():
     ##get the current postid using sqlite
