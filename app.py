@@ -1,17 +1,15 @@
 from flask import Flask,request,redirect,render_template,session
 from postmarkup import render_bbcode
-import sqlite3
+import sqlite3, csv
 app=Flask(__name__)
-conn = sqlite3.connect("post.db")
-conn2 = sqlite3.connect("comment.db")
+
+conn = sqlite3.connect("posts.db")
 c = conn.cursor()
-c2= conn.cursor()
-q = "CREATE TABLE IF NOT EXISTS forumstuff(forumid integer, forumname text, author text)"
-result = c.execute(q)
-##qc -> q for the comments .db file
-qc = "CREATE TABLE IF NOT EXISTS poststuff(postid integer, post text)"
-result = c2.execute(qc)
-conn.commit();
+q = "CREATE TABLE IF NOT EXISTS posts(postid integer primary key autoincrement, post text, title text, author text, forumname text)"
+c.execute(q)
+q = "CREATE TABLE IF NOT EXISTS comments(postid integer, comment text, author text)"
+c.execute(q)
+conn.commit()
 
 
 @app.route("/", methods=["GET","POST"])
@@ -24,7 +22,19 @@ def index():
         button = request.form["b"]
         blog = request.form["blog"]
         title = request.form["title"]
+        author = request.form["author"]
         body = request.form["body"]
+        if (blog!="" and title!="" and author!="" and body!="") :
+            print "success"
+            conn = sqlite3.connect("posts.db")
+            c = conn.cursor()
+            q = '''insert into posts values(NULL,"'''+body+'''","'''+title+'''","'''+author+'''","'''+blog+'''")'''
+            c.execute(q)
+            q = "select * from posts"
+            result = c.execute(q)
+            conn.commit()
+            for r in result:
+                print r
         return render_template("main.html")
 @app.route("/forum", methods=["GET","POST"])
 def forum():
@@ -36,6 +46,7 @@ def forum():
             request.args["title"]!="" and
             request.args["body"]!=""):
             print "success"
+            
         else:
             print "fail"
     forumTopic = request.args["topic"]
