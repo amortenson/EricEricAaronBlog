@@ -1,3 +1,8 @@
+Requires postmarkup. To Install postmarkup:
+```bash
+easy_install postmarkup
+```
+
 !!!
 Daniel Z. has been added to the group because he was absent l o l
 
