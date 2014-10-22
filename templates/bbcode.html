@@ -1,139 +1,15 @@
-
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+{% extends "base.html" %}
 <html>
 <head>
+
+{% block title %}
 <title>BBCode tags reference</title>
-<meta name="description" content="Reference for bbcode tags">
-<meta name="keywords" content="bbcode tags, bbcode reference">
-
-<script type="text/javascript">
-window.google_analytics_uacct = "UA-1826796-7";
-</script>
-<STYLE TYPE="text/css" MEDIA=screen>
-<!--
-body{
-font-family: Arial, Verdana, Myriad Web, Syntax, helvetica, sans-serif;
-background:#EEEEEE;
-font-size:14px;
-}
-h1{font-size:1.5em;margin-top:10px;margin-bottom:0px;color:#db7900;/*#FD9907;*/}
-h2{font-size:1.3em;margin-top:10px;margin-bottom:0px;color:#9b3900;/*#bb5900;*/}
-h3{font-size:1.1em;margin-top:10px;margin-bottom:0px;color:#432000;/*#9b3900;*/}
-p,code{
-	margin-top:5px;
-	margin-bottom:15px;
-	max-width:320px;
-}
-a:link{text-decoration:none;color:#00f;}
-a:visited{text-decoration:none;}
-a:active{text-decoration:none;}
-a:hover{text-decoration:underline;}
-a.mnuitem:visited{color:#00f;}
-a.mnuitem{
-	font-size:12px;
-	font-weight:bold;
-	display:block;
-	margin-bottom:10px;
-	margin-top:10px;
-	font-family: Verdana, Arial, Myriad Web, Syntax, helvetica, sans-serif;
-	padding-top:8px;
-	padding-bottom:8px;
-	padding-left:3px;
-	padding-right:3px;
-	background-color:#EEEEEE;
-	-moz-border-radius: 3px; /* FF1+ */
-  	-webkit-border-radius: 3px; /* Saf3+, Chrome */
-    border-radius: 3px; /* Opera 10.5, IE 9 */
-    text-align:center;
-    behavior: url(/htc/border-radius.htc);
-}
-a.mnuitem:hover{
-	text-decoration:none;
-	background-color:#DDDDDD;
-}
-a.mnuitemactive{
-	background-color:#BBBBBB !important;
-}
-div.bcs a:visited{color:#00f;}
-div.bcs{
-	font-size:12px;
-	text-align:left;
-	height:20px;
-	padding-top:5px;
-	padding-left:5px;
-	padding-right:5px;
-/*	background-image: -moz-linear-gradient(top, #dddddd, #ffffff);
-  	background-image: -webkit-gradient(linear,left top,left bottom,color-stop(0, #dddddd),color-stop(1, #ffffff));
-    filter:  progid:DXImageTransform.Microsoft.gradient(startColorStr='#dddddd', EndColorStr='#ffffff');
-    -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorStr='#dddddd', EndColorStr='#ffffff')";
-*/
-}
-.quote{
-background-color:#DDDDDD;
-font-size:10px;
-margin-left:2em;
-margin-right:2em;
-padding:5px;
-}
-table.reference tr:nth-child(even){
-	background-color:#ddd;
-}
-table.reference th{
-	text-decoration:underline;
-	text-align:center;
-	border:2px solid #000;
-	padding:5px;
-}
-table.reference td{
-padding-bottom:20px;
-}
-table.reference td.heading{
-font-weight:bold;
-}
-td.contenttd{
-	padding-left:10px;
-	width:740px;
-}
-td.menutd{width:150px;}
-form{margin:0;padding:0;}
-label{
-font-size:11px;
-font-weight:bold;
-display:block;
-text-align:left;
-text-transform:uppercase;
-color:#432000;}
-img.logo{
-	-moz-border-radius: 7px 7px 0px 0px; /* FF1+ */
-  	-webkit-border-radius: 7px 7px 0px 0px; /* Saf3+, Chrome */
-    border-radius: 7px 7px 0px 0px; /* Opera 10.5, IE 9 */
-}
-div#page {
-	background-color:#ffffff;padding:20px;width:900px;margin:0 auto;text-align:left;
-	-moz-border-radius: 7px; /* FF1+ */
-  	-webkit-border-radius: 7px; /* Saf3+, Chrome */
-    border-radius: 7px; /* Opera 10.5, IE 9 */
-    behavior: url(/htc/border-radius.htc);
-}
-div.info,div.info2{
-	clear:right;
-	float:right;
-	width:280px;
-	padding:20px;
-	padding-top:10px;
-	margin-bottom:20px;
-	-moz-border-radius: 7px; /* FF1+ */
-  	-webkit-border-radius: 7px; /* Saf3+, Chrome */
-    border-radius: 7px; /* Opera 10.5, IE 9 */
-    behavior: url(/htc/border-radius.htc);
-}
-div.info{background-color:#ddd;}
-div.info2{background-color:#fff;border:2px solid #9b3900;}
--->
-</STYLE>
-
-<h2 style="clear:both;">Tags reference table</h2>
-<table class="reference"><tr valign="top">
+{% endblock title %}
+{% block bodycontent %}
+<center>
+<h2>Tags reference table</h2>
+<div class="pure-u-2-3">
+<table class="pure-table"><tr valign="top">
 <th>Name</th>
 <th>Syntax</th>
 <th>Purpose</th>
@@ -229,3 +105,6 @@ Shorthand: [*]{text}\newline</td>
 <td><code>Code example</code></td>
 </tr>
 </table>
+</div>
+</center>
+{% endblock bodycontent %}
