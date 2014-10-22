@@ -51,6 +51,11 @@ def index():
 def forums():
     conn = sqlite3.connect("posts.db")
     c = conn.cursor()
+    q = "CREATE TABLE IF NOT EXISTS posts(postid integer primary key autoincrement, post text, title text, author text, forumname text)"
+    c.execute(q)
+    q = "CREATE TABLE IF NOT EXISTS comments(postid integer, comment text, author text)"
+    c.execute(q)
+    conn.commit()
     q = "select distinct posts.forumname from posts"
     tmp =c.execute(q)
     conn.commit()
@@ -90,15 +95,14 @@ def table():
 def forum():
     conn = sqlite3.connect("posts.db")
     c = conn.cursor()
-    print request.args["topic"]
-    q = "select posts.post, posts.title, posts.author from posts where posts.forumname="+request.args["topic"]
-    ##order them by time posted sooner or later
+    q = "select post, title, author from posts where forumname=["+request.args["topic"]+"]"
+    
+    q = "select post, title, author from posts"
     c.execute(q)
     conn.commit()
     topics = []
     if request.method=="GET":
         forumTopic = request.args["topic"]
-        
         return render_template("forum.html",topic=forumTopic)
     ##list all of the posts using the db
     ##request.args = get
