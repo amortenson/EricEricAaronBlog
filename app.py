@@ -90,10 +90,10 @@ def table():
 def forum():
     conn = sqlite3.connect("posts.db")
     c = conn.cursor()
-    s = str(request.args["topic"])
-    q = "select posts.post, posts.title, posts.author from posts where posts.forumname="+s
+    print request.args["topic"]
+    q = "select posts.post, posts.title, posts.author from posts where posts.forumname="+request.args["topic"]
     ##order them by time posted sooner or later
-    tmp =c.execute(q)
+    c.execute(q)
     conn.commit()
     topics = []
     if request.method=="GET":
