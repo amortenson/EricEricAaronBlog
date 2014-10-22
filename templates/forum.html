@@ -5,11 +5,21 @@
 {% endblock title %}
 
 {% block bodycontent %}
-<form class="pure-form" method="GET" action="home">
+<!--<form class="pure-form" method="POST" action="forum">
   <button type="submit" class="pure-button">
     <i class="fa fa-caret-left">  Back</i>
   </button>
-</form>
+</form>-->
+<div class ="pure-menu pure-menu-open pure-menu-horizontal">
+<ul>
+<li>
+<a href="../forums" class="pure-menu-selected">
+  <img src="http://www.cslb.ca.gov/Newsletter/2014-Fall/images/leftarrow.jpg" height=24 width=24></img>
+  <font size=4>Back</font>
+</a>
+</li>
+</ul>
+</div>
 
 <center>
 <div class="pure-u-2-3">
@@ -29,26 +39,26 @@
 </div>
 </center>
 <br><hr><br>
-{% for post in posts%}
-{{ post }}
-{% endfor %}
 <table class="pure-table pure-table-horizontal">
   <thead>
     <th>{{ topic }}</th>
     <th></th>
   </thead>
   <tbody>
+    {% for post in posts%}
     <tr>
       <td>
 	<form class="pure-form pure-form-stacked" method="GET" action="post">
-	  <input type="hidden" name="topic" value="{{ topic }}"></input>
-	  <button type="submit" name="id" value="0" class="pure-button">First generic post</button>
+	  <input type="hidden" name="postID" value="{{ post[0] }}">
+	  <input type="hidden" name="topic" value="{{ topic }}">
+	  <button type="submit" name="id" value="0" class="pure-button">{{ post[2] }}</button>
 	</form>
       </td>
       <td>
-	Posted a trillion years and an overnight story ago
+	By: {{ post[3] }}
       </td>
     </tr>
+    {% endfor %}
   </tbody>
 </table>
 <!-- use python to get all POSTS and put it into a {string} in a table-->

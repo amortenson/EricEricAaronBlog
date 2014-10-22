@@ -67,9 +67,9 @@ def forum():
     conn = sqlite3.connect("posts.db")
     c = conn.cursor()
     q = "select postid, post, title, author from posts where forumname='"+request.args["topic"]+"'"
-    result = c.execute(q);
+    result = c.execute(q)
     conn.commit()
-    print result;
+    print result
     posts = []
     for r in result:
         posts.append(r)
@@ -97,23 +97,22 @@ def forum():
                 print r
         forumTopic = request.form["topic"]
     
-    return render_template("forum.html",topic=forumTopic,posts=posts)
+    return render_template("forum.html",topic=forumTopic,posts=reversed(posts))
 
 @app.route("/post", methods=["GET","POST"])
 def post():
-    ##get the current postid using sqlite
-    ##get the post id of 
-    postID = 1
-    commentID = 1
-    if "comment" in request.args:
-        if (request.args["username"]!="" and
-            request.args["body"]!=""):
-            print "success"
-        else:
-            print "fail"
-    
+    conn = sqlite3.connect("posts.db")
+    c = conn.cursor()
+    q = "select postid, comment, author from comments where postid='"+request.args["postID"]+"'"
+    result = c.execute(q)
+    conn.commit()
+    print result;
+    posts = []
+    for r in result:
+        posts.append(r)
+        print posts
     forumTopic = request.args["topic"]
-    return render_template("post.html",topic=forumTopic)
+    return render_template("post.html",topic=forumTopic,posts=posts)
      
 if __name__=="__main__":
     app.debug=True
