@@ -64,22 +64,23 @@ def table():
 @app.route("/forum", methods=["GET","POST"])
 def forum():
     
+    conn = sqlite3.connect("posts.db")
+    c = conn.cursor()
+    q = "select postid, post, title, author from posts where forumname='"+request.args["topic"]+"'"
+    result = c.execute(q);
+    conn.commit()
+    print result;
+    posts = []
+    for r in result:
+        posts.append(r)
+    print posts
+    
     if request.method=="GET":
-        conn = sqlite3.connect("posts.db")
-        c = conn.cursor()
-        q = "select post, title, author from posts where forumname='"+request.args["topic"]+"'"
-        result = c.execute(q);
-        conn.commit()
-        print result;
-        for r in result:
-            print r
-        topics = []
         forumTopic = request.args["topic"]
-        return render_template("forum.html",topic=forumTopic)
     ##list all of the posts using the db
     ##request.args = get
     ##request.form = POST
-    else:
+    if request.method=="POST":
         body = request.form["body"]
         title = request.form["title"]
         author = request.form["username"]
@@ -94,10 +95,9 @@ def forum():
             conn.commit()
             for r in result:
                 print r
-            forumTopic = request.form["topic"]
-        else:
-            forumTopic = request.form["topic"]
-        return render_template("forum.html",topic=forumTopic)
+        forumTopic = request.form["topic"]
+    
+    return render_template("forum.html",topic=forumTopic,posts=posts)
 
 @app.route("/post", methods=["GET","POST"])
 def post():

@@ -18,7 +18,7 @@
   <form method="POST" class="pure-form pure-form-stacked" action="forum">
     <fieldset>
       <legend>Create New Post</legend>
-      <input type="hidden" name="topic" value="{{ topic }}">
+      <!--input type="hidden" name="topic" value="{{ topic }}"-->
       <input type="text" name="username" placeholder="Username">
       <input id="title" type="text" name="title" placeholder="Title">
       <textarea  class="pure-u-3-4"  name="body"></textarea>
@@ -29,6 +29,9 @@
 </div>
 </center>
 <br><hr><br>
+{% for post in posts%}
+{{ post }}
+{% endfor %}
 <table class="pure-table pure-table-horizontal">
   <thead>
     <th>{{ topic }}</th>
