@@ -14,15 +14,32 @@
 
 <body Bgcolor="E0D8E0">
   <center>
-    <div class="pure-u-11-12">
 	  {% block title %}
 	  placeholder title
 	  {% endblock title %}
-    </div>
   </center>
     <br>
+    <div class="pure-u-1-24"></div>
+    <div class="pure-u-11-12">
+    {% block menu %}
+    <!-- dummy menu -->
+    <center>
+    <div class="pure-menu pure-menu-open pure-menu-horizontal">
+    <ul>
+        <li class="pure-menu-selected"><a href="../home">Home</a></li>
+        <li><a href="../forum">Find Blogs</a></li>
+        <li><a href="../create">Make New Blog</a></li>
+	<li><a href="../table">BBCode reference</a></li>
+    </ul>
+    </div>
+    </center>
+    {% endblock menu %}
+    </div>   
+    
     <!-- we don't want to center the entire body or it'll look queer-->
-    <div class="pure-u-11-12" id = "main">
+    <div class="pure-u-1-24"></div>
+    <div class="pure-u-22-24" id = "main">
+
 	  {% block bodycontent %}
 	  placeholder body
 	  {% endblock bodycontent %}
