@@ -1,37 +1,15 @@
 {% extends "base.html" %}
+<link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.5.0/pure-min.css">
 <!-- perhaps have a form to link all current topics/categories of posts
 and give an option to create a new one. link to forum.html please-->
 {% block title %}
-<h1>Main Page</h1>
+<h1><p fontfamily: "Courier New", Courier, monospace style=color:blue>BLOG NAME HERE</p></h1>
 {% endblock title %}
 
 {% block bodycontent %}
-This is gonna be a swagoo main page someday.
-<!--
-<center>
-<p> Create new topic:</p>
-<div class="pure-u-2-3">
-<form method="POST" class="pure-form pure-form-stacked">
-    <fieldset>
-        <legend>      
-	  <input type="text" name="blog" placeholder="Blog Name">
-	</legend>
-     
-        <label for="title">Post</label>  
-	<input id="title" type="text" name="title" placeholder="Title">
-	<input id="author" type="text" name="author" placeholder="Author">
-	<textarea  class="pure-u-3-4"  name="body"></textarea>
-
-	<button type="submit" class="pure-button" name="b">Submit</button>
-    </fieldset>
-</form>
-</div>
-</center>
-<form method="GET" class="pure-form pure-form-stacked" action="forum">
-  <!-- use python to get all topics and put it into a {string} with all topic names into buttons.
-  {% for topic in topics %}
-  <button type="submit" class="pure-button" name="topic" value="{{ topic[0] }}">{{ topic[0] }}</button><br>
-  {% endfor %}
-</form>
--->
+<p style=color:blue>
+<h2>
+  Welcome to the (insert name here) blog site!
+</h2>
+As a blog site, our mission is to provide you, the user, with the best opportunity to read some interesting posts about fascinating topics. <br><br>
 {% endblock bodycontent %}
