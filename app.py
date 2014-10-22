@@ -15,6 +15,40 @@ conn.commit()
 @app.route("/", methods=["GET","POST"])
 @app.route("/home", methods=["GET","POST"])
 def index():
+    return render_template("main.html");
+    #conn = sqlite3.connect("posts.db")
+    #c = conn.cursor()
+    #q = "select distinct posts.forumname from posts"
+    #tmp =c.execute(q)
+    #conn.commit()
+    #topics = []
+    #for r in tmp:
+    #    topics.append(r)
+    #print topics
+    #if request.method=="GET":
+    #    return render_template("main.html", topics=topics)
+    #else:
+    #    ##no idea if the form works. request.args does :^)
+    #    button = request.form["b"]
+    #    blog = request.form["blog"]
+    #    title = request.form["title"]
+    #    author = request.form["author"]
+    #    body = request.form["body"]
+    #    if (blog!="" and title!="" and author!="" and body!="") :
+    #        print "success"
+    #        #conn = sqlite3.connect("posts.db")
+    #        #c = conn.cursor()
+    #        q = '''insert into posts values(NULL,"'''+body+'''","'''+title+'''","'''+author+'''","'''+blog+'''")'''
+    #        c.execute(q)
+    #        q = "select * from posts"
+    #        result = c.execute(q)
+    #        conn.commit()
+    #        for r in result:
+    #            print r
+    #   return render_template("main.html", topics = topics)
+
+@app.route("/forums", methods=["GET","POST"])
+def forums():
     conn = sqlite3.connect("posts.db")
     c = conn.cursor()
     q = "select distinct posts.forumname from posts"
@@ -24,9 +58,11 @@ def index():
     for r in tmp:
         topics.append(r)
     print topics
-    if request.method=="GET":
-        return render_template("main.html", topics=topics)
-    else:
+    return render_template("forums.html", topics = topics)
+
+@app.route("/create", methods=["GET","POST"])
+def create():
+    if request.method=="POST":
         ##no idea if the form works. request.args does :^)
         button = request.form["b"]
         blog = request.form["blog"]
@@ -35,8 +71,8 @@ def index():
         body = request.form["body"]
         if (blog!="" and title!="" and author!="" and body!="") :
             print "success"
-            #conn = sqlite3.connect("posts.db")
-            #c = conn.cursor()
+            conn = sqlite3.connect("posts.db")
+            c = conn.cursor()
             q = '''insert into posts values(NULL,"'''+body+'''","'''+title+'''","'''+author+'''","'''+blog+'''")'''
             c.execute(q)
             q = "select * from posts"
@@ -44,8 +80,12 @@ def index():
             conn.commit()
             for r in result:
                 print r
-        return render_template("main.html", topics = topics)
-    
+    return render_template("create.html")
+
+@app.route("/table", methods=["GET","POST"])
+def table():
+    return render_template("bbcode.html");
+
 @app.route("/forum", methods=["GET","POST"])
 def forum():
     conn = sqlite3.connect("posts.db")
