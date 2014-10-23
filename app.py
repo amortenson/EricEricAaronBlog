@@ -50,7 +50,7 @@ def create():
         blog = request.form["blog"]
         title = request.form["title"]
         author = request.form["author"]
-        body = render_bbcode(request.form["body"])
+        body = request.form["body"]
         if (blog!="" and title!="" and author!="" and body!="") :
             print "success"
             conn = sqlite3.connect("posts.db")
@@ -81,7 +81,7 @@ def forum():
             blog = ud["topic"]
             author = ud["username"]
             title = ud["title"]
-            body = render_bbcode(request.form["body"])         
+            body = request.form["body"]        
             q = '''insert into posts values(NULL,"'''+body+'''","'''+title+'''","'''+author+'''","'''+blog+'''")'''
             c.execute(q)
             conn.commit()
@@ -108,7 +108,7 @@ def post():
     op = "" ##op = original poster in interwebz talk
     title=""
     for r in result:
-        op = "<td>"+r[0]+"</td><td>"+r[2].replace("\n","<br>")+"</td>"
+        op = "<td>"+r[0]+"</td><td>"+render_bbcode(r[2]).replace("\n","<br>")+"</td>"
         title=r[1]
     comments = []
     print request.method +"!!!!!!!!!!!!!!!\n\n\n"
@@ -129,7 +129,8 @@ def post():
         commentid=i[0]
 
     if ("comment" in request.form):
-        body = render_bbcode(ud["body"])
+        body = ud["body"]
+        print "BODY: "+body
         author = ud["username"]
         if (author!="" and body!=""):
             q = '''insert into comments values("'''+postid+'''","'''+ str(commentid) +'''","'''+body+'''","'''+author+'''")'''
@@ -142,7 +143,7 @@ def post():
         q = "select comment, author from comments where postid='"+ud["postID"]+"' and commentid='"+str(i)+"'"
         result=c.execute(q)
         for item in result:
-            tablestr=tablestr+"<tr><td>"+item[1]+"</td><td>"+item[0]+"</td><tr>"
+            tablestr=tablestr+"<tr><td>"+item[1]+"</td><td>"+render_bbcode(item[0]).replace("\n","<br>")+"</td><tr>"
         i+=1
     
 
