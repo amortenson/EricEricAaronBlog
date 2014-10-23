@@ -3,10 +3,18 @@
 and give an option to create a new one. link to forum.html please-->
 
 {% block bodycontent %}
+<center>
 <form method="GET" class="pure-form pure-form-stacked" action="forum">
+<table width=30% class="pure-table pure-table-horizontal">
   <!-- use python to get all topics and put it into a {string} with all topic names into buttons.-->
+ <thead><th><center>All Blogs</center></th></thead>
   {% for topic in topics %}
+  <tr><td><center>
   <button type="submit" class="pure-button" name="topic" value="{{ topic[0] }}">{{ topic[0] }}</button><br>
+  </center></tr></td>
   {% endfor %}
+</table>
 </form>
+</center>
+<br><br>
 {% endblock bodycontent %}
