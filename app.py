@@ -102,7 +102,6 @@ def post():
     ##universal dict to easen the coding
     ud = dict(request.args.items() +
                          request.form.items())
-    ##GET FIRST POSTER!!!
     q = "select author,title,post from posts where postid='"+ud["postID"]+"'"
     result=c.execute(q)
     op = "" ##op = original poster in interwebz talk
@@ -145,9 +144,7 @@ def post():
         for item in result:
             tablestr=tablestr+"<tr><td>"+item[1]+"</td><td>"+render_bbcode(item[0]).replace("\n","<br>")+"</td><tr>"
         i+=1
-    
 
-    ##print comments
     return render_template("post.html",comments=tablestr,topic=topic,postid=postid,op=op,title=title)
      
 if __name__=="__main__":
