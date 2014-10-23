@@ -50,7 +50,7 @@ def create():
         blog = request.form["blog"]
         title = request.form["title"]
         author = request.form["author"]
-        body = render_bbcode(request.form["body"])
+        body = render_bbcode(request.form["body"].replace("<","&lt"))
         if (blog!="" and title!="" and author!="" and body!="") :
             print "success"
             conn = sqlite3.connect("posts.db")
@@ -91,7 +91,7 @@ def forum():
             blog = request.form["topic"]
             author = request.form["username"]
             title = request.form["title"]
-            body = render_bbcode(request.form["body"])         
+            body = render_bbcode(request.form["body"].replace("<","&lt"))         
             
             conn = sqlite3.connect("posts.db")
             c = conn.cursor()
@@ -140,7 +140,7 @@ def post():
         commentid=i[0]
 
     if ("comment" in request.form):
-        body = render_bbcode(ud["body"])
+        body = render_bbcode(ud["body"].replace('<','&lt;'))
         author = ud["username"]
         if (author!="" and body!=""):
             q = '''insert into comments values("'''+postid+'''","'''+ str(commentid) +'''","'''+body+'''","'''+author+'''")'''
