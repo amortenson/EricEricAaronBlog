@@ -108,7 +108,7 @@ def post():
     op = "" ##op = original poster in interwebz talk
     title=""
     for r in result:
-        op = "<td>"+r[0]+"</td><td>"+render_bbcode(r[2]).replace("\n","<br>")+"</td>"
+        op = "<td width='15%'>"+r[0]+"</td><td width='85%'>"+render_bbcode(r[2]).replace("\n","<br>")+"</td>"
         title=r[1]
     comments = []
     print request.method +"!!!!!!!!!!!!!!!\n\n\n"

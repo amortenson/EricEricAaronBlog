@@ -2,109 +2,110 @@
 <html>
 <head>
 
-{% block title %}
-<h1>BBCode Tags Reference</h1>
-{% endblock title %}
-{% block bodycontent %}
-<center>
-<h2>Tags reference table</h2>
-<div class="pure-u-2-3">
-<table class="pure-table"><tr valign="top">
-<th>Name</th>
-<th>Syntax</th>
-<th>Purpose</th>
-<th>Example</th>
-</tr>
-<tr valign="top">
-<td class="heading">Bold</td>
-<td>[b]{text}[/b]</td>
-<td>Makes {text} bold</td>
-<td><b>Bold example</b></td>
-</tr>
-<tr valign="top">
-<td class="heading">Italic</td>
-<td>[i]{text}[/i]</td>
-<td>Makes {text} italic</td>
-<td><i>Italic example</i></td>
-</tr>
-<tr valign="top">
-<td class="heading">Underline</td>
-<td>[u]{text}[/u]</td>
-<td>Underlines {text}</td>
-<td><u>Underline example</u></td>
-</tr>
-<tr valign="top">
-<td class="heading">Line-through</td>
-<td>[s]{text}[/s]</td>
-<td>Create a line-through/strike through on {text}</td>
-<td><del>Line-through example</del></td>
-</tr>
-<tr valign="top">
-<td class="heading">Font-size</td>
-<td>[size={number}]{text}[/size]</td>
-<td>Changes the font-size of {text}</td>
-<td><font size="6">Font-size example</font></td>
-</tr>
-<tr valign="top">
-<td class="heading">Font colour</td>
-<td>[color={colour}]{text}[/color]</td>
-<td>Changes the colour of {text}</td>
-<td><font color="red">Font color example</font></td>
-</tr>
-<tr valign="top">
-<td class="heading">Center text</td>
-<td>[center]{text}[/center]</td>
-<td>Centers {text} on screen</td>
-<td><center>Center text example</center></td>
-</tr>
-<tr valign="top">
-<td class="heading">Link</td>
-<td>[url]{url}[/url]</td>
-<td>Makes a link to {url}</td>
-<td><a href="www.google.com">www.google.com</a></td>
-</tr>
-<tr valign="top">
-<td class="heading">Link (named)</td>
-<td>[url={url}]{text}[/url]</td>
-<td>Makes a named link to {url}</td>
-<td><a href="www.google.com">Link (named) example</a></td>
-</tr>
-<tr valign="top">
-<td class="heading">Image</td>
-<td>[img]{url}[/img]</td>
-<td>Shows the image indicated by {url}</td>
-<td> <img src="https://www.google.com/images/srpr/logo11w.png" style="width:304px;height:228px"></td>
-</tr>
-<tr valign="top">
-<td class="heading">Image (resized)</td>
-<td>
-Full version: [img width={width} height={height} ...]{url}[/img]<br/>
-Another variant (shorthand): [img={width}x{height}]{url}[/img]</td>
-<td>Shows {url} image resized to {width} and {height}</td>
-<td><img src="https://www.google.com/images/srpr/logo11w.png" style="width:200px;height:228px"></td>
-</tr>
-<tr valign="top">
-<td class="heading">List</td>
-<td>Unordered list: [ul]{items}[/ul]<br/>
-Ordered list: [ol]{items}[/ol]<br/>
-Another variant: [list]{items}[/list]</td>
-<td>Displays a list of {items}</td>
-<td><ul><li>List example</li><li>2</li></ul></td>
-</tr>
-<tr valign="top">
-<td class="heading">List item</td>
-<td>[li]{text}[/li]<br/>
-Shorthand: [*]{text}\newline</td>
-<td>Species an {item} within a list</td>
-<td><li>List item example</li></td>
-</tr>
-<tr valign="top">
-<td class="heading">Code</td>
-<td>[code]{text}[/code]</td>
-<td>Renders the {text} while maintaing all white spacing</td>
-<td><code>Code example</code></td>
-</tr>
-</table>
-</div>
-</center>
-{% endblock bodycontent %}
+  {% block title %}
+  <h1>BBCode Tags Reference</h1>
+  {% endblock title %}
+  {% block bodycontent %}
+  
+    <h2>Tags reference table</h2>
+    <!--<div class="pure-u-2-3">-->
+      <table width="100%" class="pure-table">
+	<tr valign="top">
+	  <th width="10%">Name</th>
+	  <th width="40%">Syntax</th>
+	  <th width="40%">Purpose</th>
+	  <th width="30%">Example</th>
+	</tr>
+	<tr valign="top">
+	  <td class="heading">Bold</td>
+	  <td>[b]{text}[/b]</td>
+	  <td>Makes {text} bold</td>
+	  <td><b>Bold example</b></td>
+	</tr>
+	<tr valign="top">
+	  <td class="heading">Italic</td>
+	  <td>[i]{text}[/i]</td>
+	  <td>Makes {text} italic</td>
+	  <td><i>Italic example</i></td>
+	</tr>
+	<tr valign="top">
+	  <td class="heading">Underline</td>
+	  <td>[u]{text}[/u]</td>
+	  <td>Underlines {text}</td>
+	  <td><u>Underline example</u></td>
+	</tr>
+	<tr valign="top">
+	  <td class="heading">Line-through</td>
+	  <td>[s]{text}[/s]</td>
+	  <td>Create a line-through/strike through on {text}</td>
+	  <td><del>Line-through example</del></td>
+	</tr>
+	<tr valign="top">
+	  <td class="heading">Font-size</td>
+	  <td>[size={number}]{text}[/size]</td>
+	  <td>Changes the font-size of {text}</td>
+	  <td><font size="6">Font-size example</font></td>
+	</tr>
+	<tr valign="top">
+	  <td class="heading">Font colour</td>
+	  <td>[color={colour}]{text}[/color]</td>
+	  <td>Changes the colour of {text}</td>
+	  <td><font color="red">Font color example</font></td>
+	</tr>
+	<tr valign="top">
+	  <td class="heading">Center text</td>
+	  <td>[center]{text}[/center]</td>
+	  <td>Centers {text} on screen</td>
+	  <td><center>Center text example</center></td>
+	</tr>
+	<tr valign="top">
+	  <td class="heading">Link</td>
+	  <td>[url]{url}[/url]</td>
+	  <td>Makes a link to {url}</td>
+	  <td><a href="www.google.com">www.google.com</a></td>
+	</tr>
+	<tr valign="top">
+	  <td class="heading">Link (named)</td>
+	  <td>[url={url}]{text}[/url]</td>
+	  <td>Makes a named link to {url}</td>
+	  <td><a href="www.google.com">Link (named) example</a></td>
+	</tr>
+	<tr valign="top">
+	  <td class="heading">Image</td>
+	  <td>[img]{url}[/img]</td>
+	  <td>Shows the image indicated by {url}</td>
+	  <td> <img src="https://www.google.com/images/srpr/logo11w.png" style="width:304px;height:228px"></td>
+	</tr>
+	<tr valign="top">
+	  <td class="heading">Image (resized)</td>
+	  <td>
+	    <i>Full version:</i> <br>[img width={width} height={height} ...]{url}[/img]<br>
+	    <i>Another variant (shorthand):</i> <br>[img={width}x{height}]{url}[/img]</td>
+	  <td>Shows {url} image resized to {width} and {height}</td>
+	  <td><img src="https://www.google.com/images/srpr/logo11w.png" style="width:200px;height:228px"></td>
+	</tr>
+	<tr valign="top">
+	  <td class="heading">List</td>
+	  <td>Unordered list: [ul]{items}[/ul]<br/>
+	    Ordered list: [ol]{items}[/ol]<br/>
+	    Another variant: [list]{items}[/list]</td>
+	  <td>Displays a list of {items}</td>
+	  <td><ul><li>List example</li><li>2</li></ul></td>
+	</tr>
+	<tr valign="top">
+	  <td class="heading">List item</td>
+	  <td>[li]{text}[/li]<br/>
+	    Shorthand: [*]{text}\newline</td>
+	  <td>Species an {item} within a list</td>
+	  <td><li>List item example</li></td>
+	</tr>
+	<tr valign="top">
+	  <td class="heading">Code</td>
+	  <td>[code]{text}[/code]</td>
+	  <td>Renders the {text} while maintaing all white spacing</td>
+	  <td><code>Code example</code></td>
+	</tr>
+      </table>
+    <!--</div>-->
+  
+  {% endblock bodycontent %}
