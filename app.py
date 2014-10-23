@@ -50,7 +50,7 @@ def create():
         blog = request.form["blog"]
         title = request.form["title"]
         author = request.form["author"]
-        body = render_bbcode(request.form["body"].replace("<","&lt"))
+        body = render_bbcode(request.form["body"])
         if (blog!="" and title!="" and author!="" and body!="") :
             print "success"
             conn = sqlite3.connect("posts.db")
@@ -70,41 +70,30 @@ def table():
 
 @app.route("/forum", methods=["GET","POST"])
 def forum():
-    posts = []  
-    if request.method=="GET":
-        conn = sqlite3.connect("posts.db")
-        c = conn.cursor()
-        q = "select postid, post, title, author from posts where forumname='"+request.args["topic"]+"'"
-        result = c.execute(q)
-        conn.commit()
-        print result
-        
-        for r in result:
-            posts.append(r)
-        print posts
-        forumTopic = request.args["topic"]
-    if request.method=="POST":
-        print "DICT!!!!!!!!!!!!!!!!!!! "
-        print request.form.items()
-        forumTopic = request.form["topic"]
-        if body!="" and title!="" and author!="":
-            blog = request.form["topic"]
-            author = request.form["username"]
-            title = request.form["title"]
-            body = render_bbcode(request.form["body"].replace("<","&lt"))         
-            
-            conn = sqlite3.connect("posts.db")
-            c = conn.cursor()
+    #ud, unified dict
+    ud = dict(request.form.items() + request.args.items())
+    posts = []
+    conn = sqlite3.connect("posts.db")
+    c = conn.cursor()
+    if request.method=="POST" and "b" in ud:
+        forumTopic = ud["topic"]
+        if ud["body"]!="" and ud["title"]!="" and ud["username"]!="":
+            blog = ud["topic"]
+            author = ud["username"]
+            title = ud["title"]
+            body = render_bbcode(request.form["body"])         
             q = '''insert into posts values(NULL,"'''+body+'''","'''+title+'''","'''+author+'''","'''+blog+'''")'''
             c.execute(q)
-            q = "select * from posts"
-            result = c.execute(q)
             conn.commit()
-            for r in result:
-                posts.append(r)
-            print posts
+    q = "select postid, post, title, author from posts where forumname='"+ud["topic"]+"'"
+    result = c.execute(q)
+    conn.commit()
+    for r in result:
+        posts.append(r)
+    print posts
+    topic = ud["topic"]
 
-    return render_template("forum.html",topic=forumTopic,posts=reversed(posts))
+    return render_template("forum.html",topic=topic,posts=reversed(posts))
 
 @app.route("/post", methods=["GET","POST"])
 def post():
