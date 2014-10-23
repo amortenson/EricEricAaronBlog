@@ -140,7 +140,7 @@ def post():
         commentid=i[0]
 
     if ("comment" in request.form):
-        body = render_bbcode(ud["body"].replace('<','&lt;'))
+        body = render_bbcode(ud["body"].replace('<','[').replace('>',']'))
         author = ud["username"]
         if (author!="" and body!=""):
             q = '''insert into comments values("'''+postid+'''","'''+ str(commentid) +'''","'''+body+'''","'''+author+'''")'''
