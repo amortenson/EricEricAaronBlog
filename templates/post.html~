@@ -1,5 +1,9 @@
 {% extends "base.html" %}
 
+{% block title %}
+<h1>Forums: </h1>
+{% endblock title %}
+
 {% block bodycontent %}
 <form class="pure-form pure-form-stacked" method="GET" action="forum">
   <button type="submit" name="topic" value="{{ topic }}" class="pure-button">

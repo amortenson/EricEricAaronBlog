@@ -2,12 +2,14 @@
 <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.5.0/pure-min.css">
 <!-- perhaps have a form to link all current topics/categories of posts
 and give an option to create a new one. link to forum.html please-->
+{% block title %}
+<h1><p fontfamily: "Courier New", Courier, monospace style=color:blue>BLOG NAME HERE</p></h1>
+{% endblock title %}
 
 {% block bodycontent %}
 <p style=color:blue>
 <h2>
-  Welcome to the Morgenstern Blawg blog site!
+  Welcome to the (insert name here) blog site!
 </h2>
-<img class="pure-img" src="blog.jpeg">
 As a blog site, our mission is to provide you, the user, with the best opportunity to read some interesting posts about fascinating topics. <br><br>
 {% endblock bodycontent %}
