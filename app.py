@@ -100,43 +100,55 @@ def forum():
 def post():
     conn = sqlite3.connect("posts.db")
     c = conn.cursor()
+    ##universal dict to easen the coding
+    ud = dict(request.args.items() +
+                         request.form.items())
+    ##GET FIRST POSTER!!!
+    q = "select author,title,post from posts where postid='"+ud["postID"]+"'"
+    result=c.execute(q)
+    op = "" ##op = original poster in interwebz talk
+    title=""
+    for r in result:
+        op = "<th>"+r[0]+"</th><th>"+r[2]+"</th>"
+        title=r[1]
     comments = []
     print request.method +"!!!!!!!!!!!!!!!\n\n\n"
-    if (request.method=="GET"):
-        q = "select postid,commentid, comment, author from comments where postid='"+request.args["postID"]+"'"
-        result = c.execute(q)
-        conn.commit()      
-        for r in result:
-            comments.append(r)
-    
-        topic = request.args["topic"]
-        postid = request.args["postID"]
+    q = "select postid,commentid, comment, author from comments where postid='"+ud["postID"]+"'"
+    result = c.execute(q)
+    conn.commit()      
+    for r in result:
+        comments.append(r)
+    print comments
+    topic = ud["topic"]
+    postid = ud["postID"]
+    commentid=0 ##the current number of comments
+    ##prepare the html string
+    q = "select Count(*) from comments where postid='"+ud["postID"]+"'"
+    commentid = c.execute(q)
+    ##this just takes the first and only item.
+    for i in commentid:
+        commentid=i[0]
+
     if ("comment" in request.form):
-        q = "select postid,commentid, comment, author from comments where postid='"+request.form["postID"]+"'"
-        result = c.execute(q)
-        conn.commit()
-        for r in result:
-            comments.append(r)
-    
-        topic = request.form["topic"]
-        postid = request.form["postID"]
-        body = request.form["body"]
-        author = request.form["username"]
-        
+        body = ud["body"]
+        author = ud["username"]
         if (author!="" and body!=""):
-            commentid=0
-            conn = sqlite3.connect("posts.db")
-            c = conn.cursor()
-            q = "select Count(*) from comments where postid='"+request.form["postID"]+"'"
-            commentid = c.execute(q)
-            ##this just takes the first and only item.
-            for i in commentid:
-                commentid=i[0]
             q = '''insert into comments values("'''+postid+'''","'''+ str(commentid) +'''","'''+body+'''","'''+author+'''")'''
             c.execute(q)
             conn.commit()
-    print comments
-    return render_template("post.html",comments=comments,topic=topic,postid=postid)
+            commentid+=1
+    tablestr=""
+    i=0
+    while (i<commentid):
+        q = "select comment, author from comments where postid='"+ud["postID"]+"' and commentid='"+str(i)+"'"
+        result=c.execute(q)
+        for item in result:
+            tablestr=tablestr+"<tr><td>"+item[1]+"</td><td>"+item[0]+"</td><tr>"
+        i+=1
+    
+
+    ##print comments
+    return render_template("post.html",comments=tablestr,topic=topic,postid=postid,op=op,title=title)
      
 if __name__=="__main__":
     app.debug=True
