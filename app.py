@@ -37,13 +37,20 @@ def forums():
 
 @app.route("/create", methods=["GET","POST"])
 def create():
+    conn = sqlite3.connect("posts.db")
+    c = conn.cursor()
+    q = "CREATE TABLE IF NOT EXISTS posts(postid integer primary key autoincrement, post text, title text, author text, forumname text)"
+    c.execute(q)
+    q = "CREATE TABLE IF NOT EXISTS comments(postid integer,commentid integer, comment text, author text)"
+    c.execute(q)
+    conn.commit()
     if request.method=="POST":
         ##no idea if the form works. request.args does :^)
         button = request.form["b"]
         blog = request.form["blog"]
         title = request.form["title"]
         author = request.form["author"]
-        body = request.form["body"]
+        body = render_bbcode(request.form["body"])
         if (blog!="" and title!="" and author!="" and body!="") :
             print "success"
             conn = sqlite3.connect("posts.db")
@@ -63,26 +70,29 @@ def table():
 
 @app.route("/forum", methods=["GET","POST"])
 def forum():
-    
-    conn = sqlite3.connect("posts.db")
-    c = conn.cursor()
-    q = "select postid, post, title, author from posts where forumname='"+request.args["topic"]+"'"
-    result = c.execute(q)
-    conn.commit()
-    print result
-    posts = []
-    for r in result:
-        posts.append(r)
-    print posts
-    
+    posts = []  
     if request.method=="GET":
+        conn = sqlite3.connect("posts.db")
+        c = conn.cursor()
+        q = "select postid, post, title, author from posts where forumname='"+request.args["topic"]+"'"
+        result = c.execute(q)
+        conn.commit()
+        print result
+        
+        for r in result:
+            posts.append(r)
+        print posts
         forumTopic = request.args["topic"]
     if request.method=="POST":
-        body = request.form["body"]
-        title = request.form["title"]
-        author = request.form["username"]
-        blog = request.form["topic"]
-        if (author!="" and title!="" and body!=""):
+        print "DICT!!!!!!!!!!!!!!!!!!! "
+        print request.form.items()
+        forumTopic = request.form["topic"]
+        if body!="" and title!="" and author!="":
+            blog = request.form["topic"]
+            author = request.form["username"]
+            title = request.form["title"]
+            body = render_bbcode(request.form["body"])         
+            
             conn = sqlite3.connect("posts.db")
             c = conn.cursor()
             q = '''insert into posts values(NULL,"'''+body+'''","'''+title+'''","'''+author+'''","'''+blog+'''")'''
@@ -91,9 +101,9 @@ def forum():
             result = c.execute(q)
             conn.commit()
             for r in result:
-                print r
-        forumTopic = request.form["topic"]
-    
+                posts.append(r)
+            print posts
+
     return render_template("forum.html",topic=forumTopic,posts=reversed(posts))
 
 @app.route("/post", methods=["GET","POST"])
@@ -109,7 +119,7 @@ def post():
     op = "" ##op = original poster in interwebz talk
     title=""
     for r in result:
-        op = "<th>"+r[0]+"</th><th>"+r[2]+"</th>"
+        op = "<td>"+r[0]+"</td><td>"+r[2].replace("\n","<br>")+"</td>"
         title=r[1]
     comments = []
     print request.method +"!!!!!!!!!!!!!!!\n\n\n"
@@ -130,7 +140,7 @@ def post():
         commentid=i[0]
 
     if ("comment" in request.form):
-        body = ud["body"]
+        body = render_bbcode(ud["body"])
         author = ud["username"]
         if (author!="" and body!=""):
             q = '''insert into comments values("'''+postid+'''","'''+ str(commentid) +'''","'''+body+'''","'''+author+'''")'''
