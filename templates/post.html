@@ -10,18 +10,25 @@
     <i class="fa fa-caret-left">  Back</i>
   </button>
 </form>
-<p>This is one of the posts in a table? Or just html</p>
-{{ posts }}
+<p>
+<a href="../forum?topic={{ topic }}">
+  {{ topic }}
+</a>&nbsp>&nbsp
+<b>
+  <font size=6>
+    {{ title }}
+  </font>
+</b>
+</p>
+
 <table class="pure-table pure-table-bordered">
   <!-- grab the theads and td's from python's db powers
        and enter it in a {string}-->
   <thead>
-    <th>Poster</th>
-    <th>Hi pls call me senpai desu</th>
+    {{ op|safe }}
   </thead>
   <tr>
-    <td>Commenter#1</td>
-    <td>Ayyyy senpai daisuki desu</td>
+    {{ comments|safe }}
   </tr>
 </table>
 <br><br>
