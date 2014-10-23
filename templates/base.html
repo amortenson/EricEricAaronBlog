@@ -14,36 +14,50 @@
 
 <body Bgcolor="E0D8E0">
   <center>
-	  {% block title %}
-	  <h1><p fontfamily: "Courier New", Courier, monospace style=color:blue>MORGENSTAR BLAWG</p></h1>
-	  {% endblock title %}
+    {% block title %}
+    <p fontfamily: "Courier New", Courier, style=color:blue>
+      <font size=6> [U]ber [F]orum [O]peration</font>
+	<br>
+	<font size=2 color="gray">
+	<i>
+
+	    Powered by the mind. And potatoes.<br>
+	    [M]ind + [P]otatoes = [MP]<br>
+	    <img height=40 width=40 src="https://pbs.twimg.com/profile_images/378800000754658088/38ceaa2e17aadb8bb325ad0e4928bd6e.jpeg"></img>
+	</i>
+      </font>
+
+
+    </p>
+    {% endblock title %}
   </center>
-    <br>
-    <div class="pure-u-1-24"></div>
-    <div class="pure-u-11-12">
-    {% block menu %}
-    <!-- dummy menu -->
-    <center>
-    <div class="pure-menu pure-menu-open pure-menu-horizontal">
-    <ul>
-        <li class="pure-menu-selected"><a href="../home">Home</a></li>
-        <li><a href="../forums">Find Blogs</a></li>
-        <li><a href="../create">Make New Blog</a></li>
-	<li><a href="../table">BBCode reference</a></li>
-    </ul>
-    </div>
-    </center>
-    {% endblock menu %}
-    </div>   
-    
-    <!-- we don't want to center the entire body or it'll look queer-->
-    <div class="pure-u-1-24"></div>
+  <br>
+  <center>
+  <div class="pure-u-11-12">
+
+      {% block menu %}
+      <!-- dummy menu -->
+      <div class="pure-menu pure-menu-open pure-menu-horizontal">
+	<ul>
+          <li class="pure-menu-selected"><a href="../home">Home</a></li>
+          <li><a href="../forums">Find Blogs</a></li>
+          <li><a href="../create">Make New Blog</a></li>
+	  <li><a href="../table">BBCode reference</a></li>
+	</ul>
+	
+      </div>
+      {% endblock menu %}
+  </div>   
+  </center>  
+  <!-- we don't want to center the entire body or it'll look queer-->
+  <center>
     <div class="pure-u-22-24" id = "main">
-      <br>
-	  {% block bodycontent %}
-	  placeholder body
-	  {% endblock bodycontent %}
+    <br>
+    {% block bodycontent %}
+    placeholder body
+    {% endblock bodycontent %}
     </div>
-<br>
+  </center>
+  <br>
 </body>
 <html>
