@@ -7,7 +7,7 @@ conn = sqlite3.connect("posts.db")
 c = conn.cursor()
 q = "CREATE TABLE IF NOT EXISTS posts(postid integer primary key autoincrement, post text, title text, author text, forumname text)"
 c.execute(q)
-q = "CREATE TABLE IF NOT EXISTS comments(postid integer, comment text, author text)"
+q = "CREATE TABLE IF NOT EXISTS comments(postid integer,commentid integer, comment text, author text)"
 c.execute(q)
 conn.commit()
 
@@ -23,7 +23,7 @@ def forums():
     c = conn.cursor()
     q = "CREATE TABLE IF NOT EXISTS posts(postid integer primary key autoincrement, post text, title text, author text, forumname text)"
     c.execute(q)
-    q = "CREATE TABLE IF NOT EXISTS comments(postid integer, comment text, author text)"
+    q = "CREATE TABLE IF NOT EXISTS comments(postid integer,commentid integer, comment text, author text)"
     c.execute(q)
     conn.commit()
     q = "select distinct posts.forumname from posts"
@@ -77,9 +77,6 @@ def forum():
     
     if request.method=="GET":
         forumTopic = request.args["topic"]
-    ##list all of the posts using the db
-    ##request.args = get
-    ##request.form = POST
     if request.method=="POST":
         body = request.form["body"]
         title = request.form["title"]
@@ -103,16 +100,43 @@ def forum():
 def post():
     conn = sqlite3.connect("posts.db")
     c = conn.cursor()
-    q = "select postid, comment, author from comments where postid='"+request.args["postID"]+"'"
-    result = c.execute(q)
-    conn.commit()
-    print result;
-    posts = []
-    for r in result:
-        posts.append(r)
-        print posts
-    forumTopic = request.args["topic"]
-    return render_template("post.html",topic=forumTopic,posts=posts)
+    comments = []
+    print request.method +"!!!!!!!!!!!!!!!\n\n\n"
+    if (request.method=="GET"):
+        q = "select postid,commentid, comment, author from comments where postid='"+request.args["postID"]+"'"
+        result = c.execute(q)
+        conn.commit()      
+        for r in result:
+            comments.append(r)
+    
+        topic = request.args["topic"]
+        postid = request.args["postID"]
+    if ("comment" in request.form):
+        q = "select postid,commentid, comment, author from comments where postid='"+request.form["postID"]+"'"
+        result = c.execute(q)
+        conn.commit()
+        for r in result:
+            comments.append(r)
+    
+        topic = request.form["topic"]
+        postid = request.form["postID"]
+        body = request.form["body"]
+        author = request.form["username"]
+        
+        if (author!="" and body!=""):
+            commentid=0
+            conn = sqlite3.connect("posts.db")
+            c = conn.cursor()
+            q = "select Count(*) from comments where postid='"+request.form["postID"]+"'"
+            commentid = c.execute(q)
+            ##this just takes the first and only item.
+            for i in commentid:
+                commentid=i[0]
+            q = '''insert into comments values("'''+postid+'''","'''+ str(commentid) +'''","'''+body+'''","'''+author+'''")'''
+            c.execute(q)
+            conn.commit()
+    print comments
+    return render_template("post.html",comments=comments,topic=topic,postid=postid)
      
 if __name__=="__main__":
     app.debug=True
